@@ -55,14 +55,19 @@ export default async function handler(req, res) {
     `;
 
         // Dispara o email através da API do Resend
-        const data = await resend.emails.send({
+        const { data, error: resendError } = await resend.emails.send({
             from: 'Acesso Antecipado ERP <onboarding@resend.dev>',
-            to: process.env.RECEIVER_EMAIL, // O e-mail definido pelo usuário no .env
+            to: process.env.EMAIL || process.env.RECEIVER_EMAIL, // O e-mail definido pelo usuário no .env
             subject: `🚨 Novo Lead [Acesso Antecipado]: ${nome}`,
             html: emailHtml,
         });
 
-        return res.status(200).json({ success: true, id: data.id });
+        if (resendError) {
+            console.error('Erro detalhado do Resend:', resendError);
+            return res.status(400).json({ error: 'Erro ao enviar o email através do Resend.' });
+        }
+
+        return res.status(200).json({ success: true, id: data?.id });
 
     } catch (error) {
         console.error('Erro ao enviar email pelo Resend:', error);
