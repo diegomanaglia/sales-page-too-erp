@@ -13,19 +13,19 @@ import Footer from './components/sections/Footer';
 import { BRAND } from './utils/constants';
 
 export default function App() {
-  return (
-    <div className="min-h-screen bg-white" style={{ color: BRAND.text }}>
-      <Navbar />
-      <Hero />
-      <TrustLogos />
-      <Features />
-      <Showcase />
-      <Benefits />
-      <Testimonials />
-      <Pricing />
-      <FAQ />
-      <CTA />
-      <Footer />
-    </div>
-  );
+    return (
+        <div className="min-h-screen bg-white" style={{ color: BRAND.text }}>
+            <Navbar />
+            <Hero />
+            {/* <TrustLogos /> */}
+            <Features />
+            {/* <Showcase /> */}
+            {/* <Benefits /> */}
+            <Testimonials />
+            <Pricing />
+            <FAQ />
+            <CTA />
+            <Footer />
+        </div>
+    );
 }
