@@ -54,18 +54,27 @@ export default async function handler(req, res) {
       </div>
     `;
 
+        console.log("==== INICIANDO ENVIO RESEND (V2) ====");
+        console.log("RESEND_API_KEY Configurada?", !!process.env.RESEND_API_KEY);
+        console.log("EMAIL de destino (from env):", process.env.EMAIL);
+
         // Dispara o email através da API do Resend
-        const { data, error: resendError } = await resend.emails.send({
+        const payload = {
             from: 'Acesso Antecipado ERP <onboarding@resend.dev>',
-            to: process.env.EMAIL || process.env.RECEIVER_EMAIL, // O e-mail definido pelo usuário no .env
-            subject: `🚨 Novo Lead [Acesso Antecipado]: ${nome}`,
+            to: process.env.EMAIL,
+            subject: `🚨 Novo Lead ERP [Acesso Antecipado]: ${nome}`,
             html: emailHtml,
-        });
+        };
+        console.log("Payload sendo enviado para Resend:", { ...payload, html: '[HTML OMITIDO]' });
+
+        const { data, error: resendError } = await resend.emails.send(payload);
 
         if (resendError) {
-            console.error('Erro detalhado do Resend:', resendError);
-            return res.status(400).json({ error: 'Erro ao enviar o email através do Resend.' });
+            console.error('ERRO DETALHADO DO RESEND:', resendError);
+            return res.status(400).json({ error: `Erro do Resend: ${resendError.message || 'Desconhecido'}` });
         }
+
+        console.log("==== ENVIO COM SUCESSO. ID:", data?.id, "====");
 
         return res.status(200).json({ success: true, id: data?.id });
 
