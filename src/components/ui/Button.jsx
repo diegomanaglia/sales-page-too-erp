@@ -6,6 +6,7 @@ export default function Button({
   variant = 'primary', 
   size = 'md',
   className = '',
+  as = 'button',
   ...props 
 }) {
   const baseClasses = 'rounded-xl font-medium inline-flex items-center justify-center gap-2 transition-colors';
@@ -26,13 +27,15 @@ export default function Button({
     ? { backgroundColor: BRAND.primary, color: '#1f1f20' }
     : {};
 
+  const Component = as;
+
   return (
-    <button
+    <Component
       className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
       style={variantStyles}
       {...props}
     >
       {children}
-    </button>
+    </Component>
   );
 }
