@@ -1,18 +1,17 @@
-import React from 'react';
-import { BRAND } from '../../utils/constants';
+import { BRAND } from '@/utils/constants';
 
-export default function Button({ 
-  children, 
-  variant = 'primary', 
+export default function Button({
+  children,
+  variant = 'primary',
   size = 'md',
   className = '',
   as = 'button',
-  ...props 
+  ...props
 }) {
   const baseClasses = 'rounded-xl font-medium inline-flex items-center justify-center gap-2 transition-colors';
-  
+
   const variants = {
-    primary: `text-black hover:opacity-90`,
+    primary: 'text-black hover:opacity-90',
     secondary: 'border border-neutral-300 hover:bg-neutral-50',
     outline: 'border border-neutral-300 hover:bg-neutral-50'
   };
@@ -23,7 +22,7 @@ export default function Button({
     lg: 'px-5 py-3 text-base'
   };
 
-  const variantStyles = variant === 'primary' 
+  const variantStyles = variant === 'primary'
     ? { backgroundColor: BRAND.primary, color: '#1f1f20' }
     : {};
 

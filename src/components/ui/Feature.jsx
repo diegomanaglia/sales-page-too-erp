@@ -1,11 +1,10 @@
-import React from 'react';
-import { BRAND } from '../../utils/constants';
+import { BRAND } from '@/utils/constants';
 
 export default function Feature({ icon: Icon, title, desc }) {
   return (
     <div className="rounded-2xl border border-neutral-200 bg-white p-6 hover:shadow-sm transition">
-      <div 
-        className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl" 
+      <div
+        className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl"
         style={{ backgroundColor: "#fff7cc", color: BRAND.primary }}
       >
         <Icon className="h-5 w-5" />
